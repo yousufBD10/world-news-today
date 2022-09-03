@@ -21,13 +21,18 @@ const loadAllCategorise =async ()=>{
 
  setCategorise();
 
+
 const clickCategory=(category_id,)=>{
+  const progress = document.getElementById('proegress');
+  progress.classList.remove('hidden');
   fetch(`https://openapi.programming-hero.com/api/news/category/0${category_id}`)
   .then(res => res.json())
   .then(data => displayNews(data.data))
 }
  const displayNews = (news) =>{
    
+  const progress = document.getElementById('proegress');
+  progress.classList.add('hidden');
 
     const showDisplay = document.getElementById('showNews');
     showDisplay.textContent = '';
@@ -107,4 +112,4 @@ const clickCategory=(category_id,)=>{
   
 
 
-clickCategory();
+// clickCategory();

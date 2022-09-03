@@ -64,22 +64,29 @@ const clickCategory=(category_id,)=>{
     for(const detail of news){
       console.log(detail);
       const {author,image_url,details,rating,title,total_view}=detail;
+     const detailSlice = details.slice(0,150);
       const div = document.createElement('div');
-       div.classList.add('grid','gap-8');
-      div.innerHTML = `<div class="card w-96 bg-base-100 shadow-xl">
-      <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+       div.classList.add('card', 'w-full', 'bg-base-100', 'shadow-xl');
+      div.innerHTML = ` 
+      <figure><img src="${image_url}" alt="Shoes" /></figure>
       <div class="card-body">
         <h2 class="card-title">
-          Shoes!
-          <div class="badge badge-secondary">NEW</div>
+        ${title}
         </h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div class="card-actions justify-end">
-          <div class="badge badge-outline">Fashion</div> 
-          <div class="badge badge-outline">Products</div>
+        <p>${detailSlice}...</p>
+        <div class="grid grid-cols-4 gap-4">
+          <div>
+          <img class="w-1/4 rounded-full" src="${author.img}">
+          <h5>${author.name}</h5>
+          <small>${author.date}</small>
+          </div>
+          <div>01</div>
+          <div>01</div>
+        
+          <div>09</div>
         </div>
       </div>
-    </div>
+   
       `
       showDisplay.appendChild(div);
     }

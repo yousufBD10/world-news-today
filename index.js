@@ -3,7 +3,6 @@ const loadAllCategorise =async ()=>{
     const data = await response.json();
     return data.data.news_category;
 } 
-
  const setCategorise =async ()=>{
   const data = await  loadAllCategorise();
   const menu = document.getElementById('allMenu');
@@ -16,7 +15,7 @@ const loadAllCategorise =async ()=>{
    
     menu.appendChild(a);
   }
- 
+  
  }
 
  setCategorise();
@@ -28,9 +27,10 @@ const clickCategory=(category_id,)=>{
   fetch(`https://openapi.programming-hero.com/api/news/category/0${category_id}`)
   .then(res => res.json())
   .then(data => displayNews(data.data))
+  
 }
  const displayNews = (news) =>{
-   
+  console.log(news);
   const progress = document.getElementById('proegress');
   progress.classList.add('hidden');
 
@@ -47,6 +47,7 @@ const clickCategory=(category_id,)=>{
      
 
       const {author,image_url,details,title,total_view}=detail;
+               
      const detailSlice = details.slice(0,150);
       const div = document.createElement('div');
        div.classList.add('card', 'w-full', 'bg-base-100', 'shadow-xl','mt-5');
@@ -96,7 +97,9 @@ const clickCategory=(category_id,)=>{
           </div>
         
           <div class="bg-slat-400 grid justify-items-end">
-          <button id="showMorebtn" class=""><svg width="24px" height="24px" viewBox="0 0 24 24" id="magicoon-Regular" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:#41416e;}</style></defs><title>arrow-right</title><g id="arrow-right-Regular"><path id="arrow-right-Regular-2" data-name="arrow-right-Regular" class="cls-1" d="M21.53,12.531l-7,7a.75.75,0,0,1-1.06-1.061l5.719-5.72H3a.75.75,0,0,1,0-1.5H19.189L13.47,5.531A.75.75,0,1,1,14.53,4.47l7,7A.75.75,0,0,1,21.53,12.531Z"/></g></svg></button>
+      
+      
+        <label onclick="showmodal('${author.name},${author.img},${detailSlice}')" for="my-modal-3" class="btn btn-ghost modal-button"><svg width="24px" height="24px" viewBox="0 0 24 24" id="magicoon-Regular" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:#41416e;}</style></defs><title>arrow-right</title><g id="arrow-right-Regular"><path id="arrow-right-Regular-2" data-name="arrow-right-Regular" class="cls-1" d="M21.53,12.531l-7,7a.75.75,0,0,1-1.06-1.061l5.719-5.72H3a.75.75,0,0,1,0-1.5H19.189L13.47,5.531A.75.75,0,1,1,14.53,4.47l7,7A.75.75,0,0,1,21.53,12.531Z"/></g></svg></label>
           </div>
         </div>
       </div>
@@ -104,10 +107,45 @@ const clickCategory=(category_id,)=>{
       `
       showDisplay.appendChild(div);
     }
- }
-//  document.getElementById('showMorebtn').addEventListener('click',function(){
+  }
+  const news = ()=>{
+    fetch(' https://openapi.programming-hero.com/api/news/0282e0e58a5c404fbd15261f11c2ab6a')
+      .then(res => res.json())
+      .then(data => newsCategory(data.data[0]._id))
+     
+  }
+  news();
+const newsCategory = (_id)=>{
+  fetch(`https://openapi.programming-hero.com/api/news/${_id}`)
+  .then(res => res.json())
+  .then(data =>modal(data.data[0].author) )
 
-//  })
+}
+
+  const modal = (author)=>{
+   const {name, published_date,img}=author;
+     console.log(img);
+     
+     const modalBody = document.getElementById('modalBody');
+     modalBody.textContent = '';
+     modalBody.innerHTML = `
+     <div class="">
+       <img class="w-3/4" src='${img}'>
+       <h2 class="text-3xl bold">Author Name : ${name} </h2>
+       <p> Published date : ${published_date}</p>
+       </div>
+     `
+     
+     
+     
+     
+    }
+
+    
+  
+  
+
+
   
   
 

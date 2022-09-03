@@ -12,22 +12,18 @@
 <body class="container bg-slate-100 m-auto ">
     <!-- navbar -->
 <header>
-    <div class="navbar bg-base-100">
+    <div class="navbar  bg-base-100">
         
-          <div class="dropdown">
-           
-             
-        
-        </div>
+          
         <div class="navbar-center">
-          <a class=" normal-case text-2xl"><span class="bg-warning text-white rounded p-2">World News</span> Today</a>
+          <a class=" normal-case sm:text-xl lg:text-2xl"><span class="bg-warning text-white rounded p-2">World News</span> Today</a>
         </div>
         <div class="navbar-end">
-           <a href="" class="text-lg bold btn btn-ghost">News</a>
-           <a href="blog.html" class="text-lg bold btn btn-ghost">Blog</a>
+           <a href="" class="lg:text-lg sm:text-md bold btn btn-ghost">News</a>
+           <a href="blog.html" class="lg:text-lg sm:text-md bold btn btn-ghost">Blog</a>
             
           <button class="btn btn-ghost btn-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 sm:w-3 lg:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
           </button>
           
         </div>
@@ -40,7 +36,7 @@
           
           </div>
           <div class="">
-            <h1 class="w-1/2 m-auto text-2xl p-1 mt-6 ml-20 bg-white rounded"> <span id="foundItem">0</span> news items were found .</h1>
+            <h1 class="lg:w-1/2 sm:w-3/4 m-auto lg:text-2xl sm:text-lg p-1 mt-6 ml-20 bg-white rounded"> <span id="foundItem">0</span> news items were found .</h1>
           </div>
 
           <div class=" gap-4 place-content-between  my-5  ml-20 ">
@@ -63,7 +59,7 @@
             <progress id="proegress" class="progress progress-primary  w-56 hidden"></progress>
           </div>
           <!-- display news -->
-          <div class="container grid grid-cols-2 gap-4" id="showNews">
+          <div class="container grid sm:grid-cols-1 lg:grid-cols-2  gap-4" id="showNews">
 
           </div>
           <!-- modal -->

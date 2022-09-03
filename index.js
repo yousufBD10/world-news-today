@@ -14,15 +14,11 @@ const loadAllCategorise =async ()=>{
      a.classList.add('font-xl', 'px-3','btn','btn-ghost', 'py-2', 'text-slate-700', 'rounded-lg', 'hover:bg-slate-100', 'hover:text-slate-900')
     a.innerHTML = `<span onclick="loadclickCategory(${category_id})" > ${category_name}</span>
     `
-   
     menu.appendChild(a);
   }
   
- }
- setCategorise();
-
-
-
+}
+setCategorise();
 
 const loadclickCategory=(category_id,)=>{
   const progress = document.getElementById('proegress');
@@ -32,8 +28,9 @@ const loadclickCategory=(category_id,)=>{
   .then(data => loadDisplayNews(data.data))
   
 }
+loadclickCategory();
  const loadDisplayNews = (news) =>{
-
+  
   const progress = document.getElementById('proegress');
   progress.classList.add('hidden');
 
@@ -43,12 +40,8 @@ const loadclickCategory=(category_id,)=>{
     const foundItems = document.getElementById('foundItem');
     foundItems.innerText=totalNews;
     
-  
-    
     for(const detail of news){
        
-     
-
       const {author,image_url,details,title,total_view}=detail;
                
      const detailSlice = details.slice(0,150);
@@ -109,42 +102,20 @@ const loadclickCategory=(category_id,)=>{
    
       `
       showDisplay.appendChild(div);
+
+      const modalBody = document.getElementById('modalBody');
+      modalBody.textContent = '';
+      modalBody.innerHTML = `
+      <div class="">
+        <img class="w-3/4" src='${author.img}'>
+        <h2 class="text-3xl bold">Author Name : ${author.name} </h2>
+        <p> Published date : ${author.published_date}</p>
+        </div>
+      `
     }
   }
 
 
-  const news = ()=>{
-    fetch(' https://openapi.programming-hero.com/api/news/0282e0e58a5c404fbd15261f11c2ab6a')
-      .then(res => res.json())
-      .then(data => newsCategory(data.data[0]._id))
-     
-  }
-  news();
-const newsCategory = (_id)=>{
-  fetch(`https://openapi.programming-hero.com/api/news/${_id}`)
-  .then(res => res.json())
-  .then(data =>modal(data.data[0].author) )
-
-}
-
-  const modal = (author)=>{
-   const {name, published_date,img}=author;
-     console.log(img);
-     
-     const modalBody = document.getElementById('modalBody');
-     modalBody.textContent = '';
-     modalBody.innerHTML = `
-     <div class="">
-       <img class="w-3/4" src='${img}'>
-       <h2 class="text-3xl bold">Author Name : ${name} </h2>
-       <p> Published date : ${published_date}</p>
-       </div>
-     `
-     
-     
-     
-     
-    }
 
     
   

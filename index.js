@@ -2,35 +2,38 @@ const loadAllCategorise =async ()=>{
     const response = await fetch("https://openapi.programming-hero.com/api/news/categories");
     const data = await response.json();
     return data.data.news_category;
-} 
+  } 
+ 
  const setCategorise =async ()=>{
   const data = await  loadAllCategorise();
   const menu = document.getElementById('allMenu');
   for(const category of data){
    const {category_id,category_name}=category;
+   
     const a = document.createElement('a');
      a.classList.add('font-xl', 'px-3','btn','btn-ghost', 'py-2', 'text-slate-700', 'rounded-lg', 'hover:bg-slate-100', 'hover:text-slate-900')
-    a.innerHTML = `<span onclick="clickCategory(${category_id})" > ${category_name}</span>
+    a.innerHTML = `<span onclick="loadclickCategory(${category_id})" > ${category_name}</span>
     `
    
     menu.appendChild(a);
   }
   
  }
-
  setCategorise();
 
 
-const clickCategory=(category_id,)=>{
+
+
+const loadclickCategory=(category_id,)=>{
   const progress = document.getElementById('proegress');
   progress.classList.remove('hidden');
   fetch(`https://openapi.programming-hero.com/api/news/category/0${category_id}`)
   .then(res => res.json())
-  .then(data => displayNews(data.data))
+  .then(data => loadDisplayNews(data.data))
   
 }
- const displayNews = (news) =>{
-  console.log(news);
+ const loadDisplayNews = (news) =>{
+
   const progress = document.getElementById('proegress');
   progress.classList.add('hidden');
 
@@ -70,7 +73,7 @@ const clickCategory=(category_id,)=>{
           <div class="flex">
           <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path fill="none" stroke="#000" stroke-width="2" d="M12,17 C9.27272727,17 6,14.2222222 6,12 C6,9.77777778 9.27272727,7 12,7 C14.7272727,7 18,9.77777778 18,12 C18,14.2222222 14.7272727,17 12,17 Z M11,12 C11,12.55225 11.44775,13 12,13 C12.55225,13 13,12.55225 13,12 C13,11.44775 12.55225,11 12,11 C11.44775,11 11,11.44775 11,12 Z"/>
-</svg> <span>${total_view? total_view:'No views'}M</span>
+</svg> <span>${total_view? total_view:'No views'} M</span>
           </div>
 
           <div>
@@ -108,6 +111,8 @@ const clickCategory=(category_id,)=>{
       showDisplay.appendChild(div);
     }
   }
+
+
   const news = ()=>{
     fetch(' https://openapi.programming-hero.com/api/news/0282e0e58a5c404fbd15261f11c2ab6a')
       .then(res => res.json())
@@ -143,11 +148,3 @@ const newsCategory = (_id)=>{
 
     
   
-  
-
-
-  
-  
-
-
-// clickCategory();

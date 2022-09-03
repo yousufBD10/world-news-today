@@ -1,10 +1,17 @@
 const loadAllCategorise =async ()=>{
     const response = await fetch("https://openapi.programming-hero.com/api/news/categories");
-    const data = await response.json();
-    return data.data.news_category;
+    try {
+
+      const data = await response.json();
+      return data.data.news_category;
+    }
+    catch{
+      console.log(error);
+    }
   } 
  
  const setCategorise =async ()=>{
+  
   const data = await  loadAllCategorise();
   const menu = document.getElementById('allMenu');
   for(const category of data){
@@ -20,7 +27,7 @@ const loadAllCategorise =async ()=>{
 }
 setCategorise();
 
-const loadclickCategory=(category_id,)=>{
+const loadclickCategory=(category_id)=>{
   const progress = document.getElementById('proegress');
   progress.classList.remove('hidden');
   fetch(`https://openapi.programming-hero.com/api/news/category/0${category_id}`)
@@ -28,20 +35,23 @@ const loadclickCategory=(category_id,)=>{
   .then(data => loadDisplayNews(data.data))
   
 }
-loadclickCategory();
- const loadDisplayNews = (news) =>{
-  
-  const progress = document.getElementById('proegress');
-  progress.classList.add('hidden');
+loadclickCategory(category_id=08);
 
-    const showDisplay = document.getElementById('showNews');
-    showDisplay.textContent = '';
-    const totalNews = news.length;
-    const foundItems = document.getElementById('foundItem');
+
+ const loadDisplayNews = (news) =>{
+   
+   const progress = document.getElementById('proegress');
+   progress.classList.add('hidden');
+   
+   const showDisplay = document.getElementById('showNews');
+   showDisplay.textContent = '';
+   const totalNews = news.length;
+   const foundItems = document.getElementById('foundItem');
     foundItems.innerText=totalNews;
     
+    
     for(const detail of news){
-       
+      
       const {author,image_url,details,title,total_view}=detail;
                
      const detailSlice = details.slice(0,150);

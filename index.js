@@ -12,18 +12,23 @@ const loadAllCategorise =async ()=>{
  
  const setCategorise =async ()=>{
   
-  const data = await  loadAllCategorise();
-  const menu = document.getElementById('allMenu');
-  for(const category of data){
-   const {category_id,category_name}=category;
-   
-    const a = document.createElement('a');
-     a.classList.add('font-xl', 'px-3','btn','btn-ghost', 'py-2', 'text-slate-700', 'rounded-lg', 'hover:bg-slate-100', 'hover:text-slate-900')
-    a.innerHTML = `<span onclick="loadclickCategory(${category_id})" > ${category_name}</span>
-    `
-    menu.appendChild(a);
-  }
+    const data = await  loadAllCategorise();
+
   
+ 
+
+    const menu = document.getElementById('allMenu');
+    for(const category of data){
+     const {category_id,category_name}=category;
+     
+      const a = document.createElement('a');
+       a.classList.add('font-xl', 'px-3','btn','btn-ghost', 'py-2', 'text-slate-700', 'rounded-lg', 'hover:bg-slate-100', 'hover:text-slate-900')
+      a.innerHTML = `<span onclick="loadclickCategory(${category_id})" > ${category_name}</span>
+      `
+      menu.appendChild(a);
+    
+    
+  }
 }
 setCategorise();
 
@@ -52,8 +57,8 @@ loadclickCategory(category_id=08);
     
     for(const detail of news){
       
-      const {author,image_url,details,title,total_view}=detail;
-               
+      const {author,image_url,details,title,total_view} = detail;
+  
      const detailSlice = details.slice(0,150);
       const div = document.createElement('div');
        div.classList.add('card', 'w-full', 'bg-base-100', 'shadow-xl','mt-5');
@@ -105,23 +110,29 @@ loadclickCategory(category_id=08);
           <div class="bg-slat-400 grid justify-items-end">
       
       
-        <label onclick="showmodal('${author.name},${author.img},${detailSlice}')" for="my-modal-3" class="btn btn-ghost modal-button"><svg width="24px" height="24px" viewBox="0 0 24 24" id="magicoon-Regular" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:#41416e;}</style></defs><title>arrow-right</title><g id="arrow-right-Regular"><path id="arrow-right-Regular-2" data-name="arrow-right-Regular" class="cls-1" d="M21.53,12.531l-7,7a.75.75,0,0,1-1.06-1.061l5.719-5.72H3a.75.75,0,0,1,0-1.5H19.189L13.47,5.531A.75.75,0,1,1,14.53,4.47l7,7A.75.75,0,0,1,21.53,12.531Z"/></g></svg></label>
+        <label id="showMore" for="my-modal-3" class="btn btn-ghost modal-button"><svg width="24px" height="24px" viewBox="0 0 24 24" id="magicoon-Regular" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:#41416e;}</style></defs><title>arrow-right</title><g id="arrow-right-Regular"><path id="arrow-right-Regular-2" data-name="arrow-right-Regular" class="cls-1" d="M21.53,12.531l-7,7a.75.75,0,0,1-1.06-1.061l5.719-5.72H3a.75.75,0,0,1,0-1.5H19.189L13.47,5.531A.75.75,0,1,1,14.53,4.47l7,7A.75.75,0,0,1,21.53,12.531Z"/></g></svg></label>
           </div>
         </div>
       </div>
    
       `
       showDisplay.appendChild(div);
+        
+      document.getElementById('showMore').addEventListener('click',function(){
+       
+       const modalody = document.getElementById('modalBody');
+       modalody.textContent = '';
+       modalody.innerHTML = `
+                             <div>
+                               <img class="w-3/4" src='${author.img}'>
+                               <h2 class="text-3xl bold">Author Name: ${author.name}</h2>
+                               <small>Published date: ${author.published_date}</small>
+                               <p>${detailSlice}</p>
+                               </div>
+                                `
+     })
 
-      const modalBody = document.getElementById('modalBody');
-      modalBody.textContent = '';
-      modalBody.innerHTML = `
-      <div class="">
-        <img class="w-3/4" src='${author.img}'>
-        <h2 class="text-3xl bold">Author Name : ${author.name} </h2>
-        <p> Published date : ${author.published_date}</p>
-        </div>
-      `
+      
     }
   }
 
